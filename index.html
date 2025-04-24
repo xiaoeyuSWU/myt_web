@@ -41,11 +41,19 @@
         }
 
         .main-timer {
-            font-size: 2.5em;
+            font-size: 1.5em;
             color: var(--primary-color);
             margin: 20px 0;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
+
+        .main-title {
+            font-size: 1.5em; /* 更小一点的标题 */
+            color: var(--primary-color);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            margin-top: 10px;
+        }
+
 
         .countdown {
             font-size: 1.2em;
@@ -170,7 +178,7 @@
 <body>
     <div class="container">
         <div class="timer-section">
-            <h1>这是🌾和🍇一起走过的</h1>
+            <h1 class="main-title">这是🌾和🍇一起走过的</h1>
             <div class="main-timer" id="loveTimer"></div>
             <div class="countdown" id="anniversaryCountdown"></div>
             <!-- 在倒计时div下方添加这个进度条结构 -->
@@ -258,8 +266,9 @@
             const countdownHours = Math.floor((countdownDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     
             document.getElementById('anniversaryCountdown').innerHTML = `
-                距离周年纪念日还有：${countdownDays} 天 ${countdownHours} 小时
+                距离周年纪念日还有<br>${countdownDays} 天 ${countdownHours} 小时
             `;
+
     
             // 计算进度百分比
             const totalTime = nextAnniversary - startDate;
