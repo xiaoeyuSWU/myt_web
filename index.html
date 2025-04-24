@@ -288,8 +288,9 @@
             heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
     
             const fontSize = 24;
-            heart.style.left = `${e.clientX - fontSize / 2}px`;
-            heart.style.top = `${e.clientY - fontSize / 2}px`;
+            heart.style.left = `${e.pageX - fontSize / 2}px`;
+            heart.style.top = `${e.pageY - fontSize / 2}px`;
+
     
             document.body.appendChild(heart);
     
