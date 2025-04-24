@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>麦芽糖🌾和葡萄糖🍇</title>
+    <style>
+        :root {
+            --primary-color: #ff7eb9;
+            --secondary-color: #7ac5f8;
+            --bg-gradient: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .timer-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .main-timer {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .countdown {
+            font-size: 1.2em;
+            color: var(--secondary-color);
+            margin-bottom: 30px;
+        }
+
+        .memories-wall {
+            display: grid;
+            gap: 20px;
+        }
+
+        .memory-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .memory-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .memory-date {
+            color: var(--primary-color);
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .memory-content {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .main-timer {
+                font-size: 1.8em;
+            }
+            
+            .container {
+                padding: 15px;
+                margin: 10px;
+            }
+        }
+        .memory-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+            margin: 15px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .memory-image:hover {
+            transform: scale(1.02);
+        }
+
+        .memory-card {
+            padding: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .memory-image {
+                max-height: 250px;
+                object-fit: cover;
+            }
+        }
+
+        /* 在style标签内添加这些样式 */
+        .progress-container {
+            width: 80%;
+            height: 20px;
+            background: rgba(255, 126, 185, 0.2);
+            border-radius: 10px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--primary-color); /* 添加边框 */
+
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--primary-color);
+            width: 0;
+            transition: width 0.5s ease;
+            position: relative;
+        }
+
+        .progress-text {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 0.8em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="timer-section">
+            <h1>这是🌾和🍇一起走过的</h1>
+            <div class="main-timer" id="loveTimer"></div>
+            <div class="countdown" id="anniversaryCountdown"></div>
+            <!-- 在倒计时div下方添加这个进度条结构 -->
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar">
+                    <div class="progress-text" id="progressText">0%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="memories-wall">
+            <div class="memory-card">
+                <div class="memory-date">2025年3月19日</div>
+                <div class="memory-content">🌾给🍇送了一枚戒指💍</div>
+                <img src="戒指.jpg"
+                        alt="戒指"
+                        class="memory-image">
+            </div>
+            <div class="memory-card">
+                <div class="memory-date">2025年1月27日</div>
+                <div class="memory-content">长春的初雪❄️，🍇在雪上写了“LBY♥️MYT”</div>
+            </div>
+            <div class="memory-card">
+                <div class="memory-date">2025年1月12日</div>
+                <div class="memory-content">🍇送🌾去高铁站，因为🍇不能进站还现场买了张高铁票哈哈</div>
+                <img src="高铁站.jpg"
+                alt="高铁站"
+                class="memory-image">
+            </div>
+            <div class="memory-card">
+                <div class="memory-date">2025年1月1日</div>
+                <div class="memory-content">🌾和🍇一起跨年^ ^</div>
+            </div>
+            <div class="memory-card">
+                <div class="memory-date">2024年12月14日</div>
+                <div class="memory-content">🍇惨惨的摔咯，收到了很多很多朋友的关心，🌾给🍇送了可爱的ckw宝宝，现在还挂在🍇的书包上</div>
+            </div>
+            <div class="memory-card">
+                <div class="memory-date">2025年12月13日</div>
+                <div class="memory-content">🌾和🍇吃的第一顿漂亮饭^ ^</div>
+                <img src="第一顿漂亮饭.jpg"
+                     alt="第一顿漂亮饭"
+                     class="memory-image">
+            </div>
+            <div class="memory-card">
+                <div class="memory-date">2024年12月9日</div>
+                <div class="memory-content">🌾和🍇认识啦~</div>
+                <img src="认识.jpg"
+                     alt="认识"
+                     class="memory-image">
+            </div>
+        </div>
+    </div>
+
+    <audio id="bgMusic" autoplay loop>
+        <source src="红豆.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // 相识时间计算
+        const startDate = new Date('2024-12-09T13:17:00');
+        
+        function updateTimers() {
+            const now = new Date();
+            
+            // 总相识时间
+            const diff = now - startDate;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('loveTimer').innerHTML = `
+                ${days} 天 ${hours} 小时 ${minutes} 分 ${seconds} 秒
+            `;
+
+            // 周年倒计时
+            const nextAnniversary = new Date(startDate.getFullYear() + 1, 11, 9, 13, 17, 0);
+            if (now > nextAnniversary) {
+                nextAnniversary.setFullYear(nextAnniversary.getFullYear() + 1);
+            }
+            
+            const countdownDiff = nextAnniversary - now;
+            const countdownDays = Math.floor(countdownDiff / (1000 * 60 * 60 * 24));
+            const countdownHours = Math.floor((countdownDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            
+            document.getElementById('anniversaryCountdown').innerHTML = `
+                距离周年纪念日还有：${countdownDays} 天 ${countdownHours} 小时
+            `;
+
+            // 在updateTimers函数内添加这些计算逻辑（在周年倒计时计算之后）
+            // 计算进度百分比
+            const totalTime = nextAnniversary - startDate;
+            const passedTime = now - startDate;
+            const progressPercent = (passedTime / totalTime * 100).toFixed(1);
+
+            // 更新进度条
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            progressBar.style.width = `${progressPercent}%`;
+            progressText.textContent = `${progressPercent}%`;
+
+            // 当进度超过100%时处理（周年当天）
+            if (progressPercent >= 100) {
+                progressBar.style.width = '100%';
+                progressText.textContent = '100%';
+            }
+        }
+
+        // 每秒钟更新时间
+        setInterval(updateTimers, 1000);
+        updateTimers();
+
+        // 音乐自动播放处理
+        document.addEventListener('click', function() {
+            const audio = document.getElementById('bgMusic');
+            audio.play().catch(() => {});
+        });
+    </script>
+</body>
+</html>
