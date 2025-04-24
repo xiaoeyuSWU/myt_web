@@ -146,6 +146,25 @@
             font-size: 0.8em;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
+        .heart-animation {
+            position: fixed;
+            font-size: 24px;
+            pointer-events: none;
+            animation: floatUp 1s ease-out forwards;
+            z-index: 9999;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(1.5);
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -213,63 +232,70 @@
     <script>
         // 相识时间计算
         const startDate = new Date('2024-12-09T13:17:00');
-        
+    
         function updateTimers() {
             const now = new Date();
-            
+    
             // 总相识时间
             const diff = now - startDate;
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-            
+    
             document.getElementById('loveTimer').innerHTML = `
                 ${days} 天 ${hours} 小时 ${minutes} 分 ${seconds} 秒
             `;
-
+    
             // 周年倒计时
             const nextAnniversary = new Date(startDate.getFullYear() + 1, 11, 9, 13, 17, 0);
             if (now > nextAnniversary) {
                 nextAnniversary.setFullYear(nextAnniversary.getFullYear() + 1);
             }
-            
+    
             const countdownDiff = nextAnniversary - now;
             const countdownDays = Math.floor(countdownDiff / (1000 * 60 * 60 * 24));
             const countdownHours = Math.floor((countdownDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            
+    
             document.getElementById('anniversaryCountdown').innerHTML = `
                 距离周年纪念日还有：${countdownDays} 天 ${countdownHours} 小时
             `;
-
-            // 在updateTimers函数内添加这些计算逻辑（在周年倒计时计算之后）
+    
             // 计算进度百分比
             const totalTime = nextAnniversary - startDate;
             const passedTime = now - startDate;
             const progressPercent = (passedTime / totalTime * 100).toFixed(1);
-
+    
             // 更新进度条
             const progressBar = document.getElementById('progressBar');
             const progressText = document.getElementById('progressText');
-            progressBar.style.width = `${progressPercent}%`;
-            progressText.textContent = `${progressPercent}%`;
-
-            // 当进度超过100%时处理（周年当天）
-            if (progressPercent >= 100) {
-                progressBar.style.width = '100%';
-                progressText.textContent = '100%';
-            }
+            progressBar.style.width = `${Math.min(progressPercent, 100)}%`;
+            progressText.textContent = `${Math.min(progressPercent, 100)}%`;
         }
-
-        // 每秒钟更新时间
+    
         setInterval(updateTimers, 1000);
         updateTimers();
-
+    
         // 音乐自动播放处理
-        document.addEventListener('click', function() {
+        document.addEventListener('click', function (e) {
             const audio = document.getElementById('bgMusic');
             audio.play().catch(() => {});
+    
+            // 爱心动画效果
+            const hearts = ['❤️', '🧡', '💛', '💚', '💙', '💜'];
+            const heart = document.createElement('div');
+            heart.className = 'heart-animation';
+            heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+    
+            const fontSize = 24;
+            heart.style.left = `${e.clientX - fontSize / 2}px`;
+            heart.style.top = `${e.clientY - fontSize / 2}px`;
+    
+            document.body.appendChild(heart);
+    
+            setTimeout(() => heart.remove(), 1000); // 动画完成后移除
         });
     </script>
+    
 </body>
 </html>
