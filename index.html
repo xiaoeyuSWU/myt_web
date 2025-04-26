@@ -172,6 +172,27 @@
                 transform: translateY(-100px) scale(1.5);
             }
         }
+        .music-control {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #musicButton {
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        #musicButton:hover {
+            transform: scale(1.1);
+        }
 
     </style>
 </head>
@@ -181,12 +202,16 @@
             <h1 class="main-title">这是🌾和🍇一起走过的</h1>
             <div class="main-timer" id="loveTimer"></div>
             <div class="countdown" id="anniversaryCountdown"></div>
-            <!-- 在倒计时div下方添加这个进度条结构 -->
             <div class="progress-container">
                 <div class="progress-bar" id="progressBar">
                     <div class="progress-text" id="progressText">0%</div>
                 </div>
             </div>
+            <!-- 新增音乐控制按钮 -->
+            <div class="music-control">
+                <button id="musicButton">🎵</button>
+            </div>
+
         </div>
 
         <div class="memories-wall">
@@ -232,7 +257,7 @@
             </div>
             <div class="memory-card">
                 <div class="memory-date">开发日志：</div>
-                <div class="memory-content">2025年4月24日。完成了基本功能的开发。开发回忆卡片，强化了悬浮动效（hover时轻微上浮），支持每张卡片配图，并为图片添加了圆角阴影与轻微缩放动画。标题和时间字体也进行了优化，整体风格更加清新温暖。在功能上，新增总相识时间动态计时器、一周年倒计时（显示天数与小时）以及一周年进度条展示，清晰直观。页面支持自动播放背景音乐《红豆》。新增爱心点击特效，每次点击都会生成随机颜色的飞舞爱心动画。</div>
+                <div class="memory-content">2025年4月24日。完成了基本功能的开发。开发回忆卡片，强化了悬浮动效（hover时轻微上浮），支持每张卡片配图，并为图片添加了圆角阴影与轻微缩放动画。标题和时间字体也进行了优化，整体风格更加清新温暖。在功能上，新增总相识时间动态计时器、一周年倒计时（显示天数与小时）以及一周年进度条展示，清晰直观。页面支持自动播放背景音乐《红豆》。新增爱心点击特效，每次点击都会生成随机颜色的飞舞爱心动画。增加了回滚文件方便回滚。</div>
                 <div class="memory-content">2025年4月26日。优化了字体大小显示，确保倒计时不会因为字体过大而出现自动换行。优化了手机和电脑端显示不匹配的问题。优化了音乐播放逻辑。丰富了内容。</div>
 
 
@@ -298,24 +323,38 @@
     
         // 音乐自动播放处理
         document.addEventListener('click', function (e) {
-            const audio = document.getElementById('bgMusic');
-            audio.play().catch(() => {});
-    
-            // 爱心动画效果
+            // 只处理爱心动画，不控制音乐了！！
             const hearts = ['❤️', '🧡', '💛', '💚', '💙', '💜'];
             const heart = document.createElement('div');
             heart.className = 'heart-animation';
             heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
-    
+
             const fontSize = 24;
             heart.style.left = `${e.pageX - fontSize / 2}px`;
             heart.style.top = `${e.pageY - fontSize / 2}px`;
 
-    
             document.body.appendChild(heart);
-    
-            setTimeout(() => heart.remove(), 1000); // 动画完成后移除
+            setTimeout(() => heart.remove(), 1000);
         });
+
+        // 音乐控制按钮逻辑
+            const musicButton = document.getElementById('musicButton');
+            const audio = document.getElementById('bgMusic');
+
+            // 默认是播放状态
+            let isPlaying = true;
+
+            musicButton.addEventListener('click', function () {
+                if (isPlaying) {
+                    audio.pause();
+                    musicButton.textContent = '🔇'; // 切换成静音图标
+                } else {
+                    audio.play();
+                    musicButton.textContent = '🎵'; // 切换回播放图标
+                }
+                isPlaying = !isPlaying; // 状态取反
+            });
+
     </script>
     
 </body>
