@@ -41,7 +41,7 @@
         }
 
         .main-timer {
-            font-size: 1.5em;
+            font-size: 1.0em;
             color: var(--primary-color);
             margin: 20px 0;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
@@ -56,7 +56,7 @@
 
 
         .countdown {
-            font-size: 1.2em;
+            font-size: 0.8em;
             color: var(--secondary-color);
             margin-bottom: 30px;
         }
@@ -266,7 +266,7 @@
             const countdownHours = Math.floor((countdownDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     
             document.getElementById('anniversaryCountdown').innerHTML = `
-                距离周年纪念日还有<br>${countdownDays} 天 ${countdownHours} 小时
+                距离周年纪念日还有<br>${countdownDays} 天 ${countdownHours} 小时<br>一周年进度条👇
             `;
 
     
