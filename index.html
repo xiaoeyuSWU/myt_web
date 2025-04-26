@@ -209,7 +209,7 @@
             </div>
             <!-- 新增音乐控制按钮 -->
             <div class="music-control">
-                <button id="musicButton">🎵</button>
+                <button id="musicButton">🔇</button>
             </div>
 
         </div>
@@ -269,7 +269,7 @@
         </div>
     </div>
 
-    <audio id="bgMusic" autoplay loop>
+    <audio id="bgMusic" loop>
         <source src="红豆.mp3" type="audio/mpeg">
     </audio>
 
@@ -342,18 +342,21 @@
             const audio = document.getElementById('bgMusic');
 
             // 默认是播放状态
-            let isPlaying = true;
+        // 默认不播放状态
+        let isPlaying = false;
 
-            musicButton.addEventListener('click', function () {
-                if (isPlaying) {
-                    audio.pause();
-                    musicButton.textContent = '🔇'; // 切换成静音图标
-                } else {
-                    audio.play();
-                    musicButton.textContent = '🎵'; // 切换回播放图标
-                }
-                isPlaying = !isPlaying; // 状态取反
-            });
+        musicButton.addEventListener('click', function () {
+            if (isPlaying) {
+                audio.pause();
+                musicButton.textContent = '🔇'; // 切换成静音图标
+            } else {
+                audio.play().catch(error => {  // 处理自动播放策略
+                    console.log('需要用户交互后才能播放');
+                });
+                musicButton.textContent = '🎵'; // 切换成播放图标
+            }
+            isPlaying = !isPlaying;
+        });
 
     </script>
     
