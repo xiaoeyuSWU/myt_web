@@ -48,12 +48,11 @@
         }
 
         .main-title {
-            font-size: 1.5em; /* 更小一点的标题 */
+            font-size: 1.5em;
             color: var(--primary-color);
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
             margin-top: 10px;
         }
-
 
         .countdown {
             font-size: 1.0em;
@@ -64,12 +63,13 @@
         .memories-wall {
             display: grid;
             gap: 20px;
+            grid-template-columns: 1fr; /* 始终保持单列布局 */
         }
 
         .memory-card {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
-            padding: 20px;
+            padding: 25px;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s ease;
         }
@@ -99,6 +99,7 @@
                 margin: 10px;
             }
         }
+        
         .memory-image {
             width: 100%;
             max-width: 400px;
@@ -113,10 +114,6 @@
             transform: scale(1.02);
         }
 
-        .memory-card {
-            padding: 25px;
-        }
-
         @media (max-width: 768px) {
             .memory-image {
                 max-height: 250px;
@@ -124,7 +121,6 @@
             }
         }
 
-        /* 在style标签内添加这些样式 */
         .progress-container {
             width: 80%;
             height: 20px;
@@ -133,8 +129,7 @@
             margin: 20px auto;
             position: relative;
             overflow: hidden;
-            border: 2px solid var(--primary-color); /* 添加边框 */
-
+            border: 2px solid var(--primary-color);
         }
 
         .progress-bar {
@@ -154,6 +149,7 @@
             font-size: 0.8em;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
+        
         .heart-animation {
             position: fixed;
             font-size: 24px;
@@ -172,6 +168,7 @@
                 transform: translateY(-100px) scale(1.5);
             }
         }
+        
         .music-control {
             text-align: center;
             margin-top: 20px;
@@ -193,7 +190,6 @@
         #musicButton:hover {
             transform: scale(1.1);
         }
-
     </style>
 </head>
 <body>
@@ -207,62 +203,55 @@
                     <div class="progress-text" id="progressText">0%</div>
                 </div>
             </div>
-            <!-- 新增音乐控制按钮 -->
             <div class="music-control">
                 <button id="musicButton">🔇</button>
             </div>
-
         </div>
 
+        <div class="memories-wall">
             <div class="memory-card">
                 <div class="memory-date">2025年5月28日</div>
-                    <div class="memory-content">给宝宝送了一个jellycat玩偶~</div>
+                <div class="memory-content">给宝宝送了一个jellycat玩偶~</div>
             </div>
-
 
             <div class="memory-card">
                 <div class="memory-date">2025年5月27日</div>
-                    <div class="memory-content">宝宝今天也是当上坏蛋了</div>
-                    <div class="memory-content">🌾：我对我的床和老公都是生理性喜欢</div>
-                    <div class="memory-content">🍇：所以你说你要把我压在床上 是吗</div>
-                    <div class="memory-content">🌾：对 压倒老公再亲亲 让老公喘</div>
-                    <div class="memory-content">🍇：坏蛋</div>                    
-                    <div class="memory-content">🌾：我又坏了 那你喜欢坏坏的我吗</div>
-                    <div class="memory-content">🍇：超级喜欢</div>
-                    <div class="memory-content">🌾：那我就不装了哈哈 等我在床上亲死你</div>
+                <div class="memory-content">宝宝今天也是当上坏蛋了</div>
+                <div class="memory-content">🌾：我对我的床和老公都是生理性喜欢</div>
+                <div class="memory-content">🍇：所以你说你要把我压在床上 是吗</div>
+                <div class="memory-content">🌾：对 压倒老公再亲亲 让老公喘</div>
+                <div class="memory-content">🍇：坏蛋</div>                    
+                <div class="memory-content">🌾：我又坏了 那你喜欢坏坏的我吗</div>
+                <div class="memory-content">🍇：超级喜欢</div>
+                <div class="memory-content">🌾：那我就不装了哈哈 等我在床上亲死你</div>
             </div>
+            
             <div class="memory-card">
                 <div class="memory-date">2025年5月26日</div>
-                    <div class="memory-content">上午上完电路原理实验课，去找宝宝吃午饭，宝宝在青李值班我跑到青竹去了哈哈，然后火速回到青李</div>
-                    <div class="memory-content">中午和宝宝一起吃饭都很开心捏^ ^讨论了4i哈哈哈</div>
-                    <div class="memory-content">和宝宝一起吃的茶泡饭 是我和宝宝都爱吃的🧡</div>
+                <div class="memory-content">上午上完电路原理实验课，去找宝宝吃午饭，宝宝在青李值班我跑到青竹去了哈哈，然后火速回到青李</div>
+                <div class="memory-content">中午和宝宝一起吃饭都很开心捏^ ^讨论了4i哈哈哈</div>
+                <div class="memory-content">和宝宝一起吃的茶泡饭 是我和宝宝都爱吃的🧡</div>
             </div>
 
             <div class="memory-card">
                 <div class="memory-date">2025年5月20日</div>
-                    <div class="memory-content">这是一个记录🍇和🌾在一起的日子里的点点滴滴的网站^ ^</div>
-                    <div class="memory-content">形式上甚至有点像是流水账，但情感上远远不是。</div>
-                    <div class="memory-content">有具体的时间、事件、地点，有细腻的感受，有我们之间的互动与情绪。</div>
-                    <div class="memory-content">不是冷冰冰的“做了什么”，而是带着回忆温度的生活碎片🍇🧡🌾</div>
+                <div class="memory-content">这是一个记录🍇和🌾在一起的日子里的点点滴滴的网站^ ^</div>
+                <div class="memory-content">形式上甚至有点像是流水账，但情感上远远不是。</div>
+                <div class="memory-content">有具体的时间、事件、地点，有细腻的感受，有我们之间的互动与情绪。</div>
+                <div class="memory-content">不是冷冰冰的“做了什么”，而是带着回忆温度的生活碎片🍇🧡🌾</div>
             </div>
 
             <div class="memory-card">
                 <div class="memory-date">2025年5月19日</div>
                 <div class="memory-content">你是我独一无二的玫瑰~</div>
-                <img src="pic/蛋仔1.jpg" loading="lazy"
-                    alt="蛋仔1"
-                    class="memory-image">
-                <img src="pic/蛋仔2.jpg" loading="lazy"
-                    alt="蛋仔2"
-                    class="memory-image">
+                <img src="pic/蛋仔1.jpg" loading="lazy" alt="蛋仔1" class="memory-image">
+                <img src="pic/蛋仔2.jpg" loading="lazy" alt="蛋仔2" class="memory-image">
             </div>
 
             <div class="memory-card">
                 <div class="memory-date">2025年5月8日</div>
                 <div class="memory-content">只有我们两个是学生的食堂哈哈哈</div>
-                <img src="pic/食堂.jpg" loading="lazy"
-                    alt="食堂"
-                    class="memory-image">
+                <img src="pic/食堂.jpg" loading="lazy" alt="食堂" class="memory-image">
             </div>
 
             <div class="memory-card">
@@ -273,131 +262,115 @@
             <div class="memory-card">
                 <div class="memory-date">2025年5月1日</div>
                 <div class="memory-content">1号和2号和宝宝一起待了超级久，1号中午和宝宝一起慢慢的吃饭导致没看上电影哈哈哈，骑电动车很远去的电影院，还是一个有bug的电影院，看电影的时候我和宝宝都哭了呜呜</div>
-                <img src="pic/电影院.jpg" loading="lazy"
-                    alt="电影院"
-                    class="memory-image">
+                <img src="pic/电影院.jpg" loading="lazy" alt="电影院" class="memory-image">
             </div>
+            
             <div class="memory-card">
                 <div class="memory-date">2025年4月20日</div>
                 <div class="memory-content">也是第二次吃上觅食了，那天超级热🥵</div>
-                <img src="pic/觅食.jpg" loading="lazy"
-                    alt="觅食"
-                    class="memory-image">
+                <img src="pic/觅食.jpg" loading="lazy" alt="觅食" class="memory-image">
             </div>
+            
             <div class="memory-card">
                 <div class="memory-date">2025年4月13日</div>
                 <div class="memory-content">吃遍吾悦进度+1</div>
-                <img src="pic/youban.jpg" loading="lazy"
-                    alt="youban"
-                    class="memory-image">
+                <img src="pic/youban.jpg" loading="lazy" alt="youban" class="memory-image">
             </div>
+            
             <div class="memory-card">
                 <div class="memory-date">2025年4月4日</div>
                 <div class="memory-content">要在宝宝书上留纪念^ ^</div>
-                <img src="pic/book.jpg" loading="lazy"
-                    alt="book"
-                    class="memory-image">
+                <img src="pic/book.jpg" loading="lazy" alt="book" class="memory-image">
             </div>
+            
             <div class="memory-card">
                 <div class="memory-date">2025年4月4日</div>
                 <div class="memory-content">偶尔双向辜负，经常双向奔赴</div>
-                <img src="pic/双向辜负.png" loading="lazy"
-                    alt="双向辜负"
-                    class="memory-image">
+                <img src="pic/双向辜负.png" loading="lazy" alt="双向辜负" class="memory-image">
             </div>
+            
             <div class="memory-card">
                 <div class="memory-date">2025年3月22日</div>
                 <div class="memory-content">🌾比🍇聪明的证据加一~</div>
-                <img src="pic/wuyue.jpg" loading="lazy"
-                    alt="wuyue"
-                    class="memory-image">
+                <img src="pic/wuyue.jpg" loading="lazy" alt="wuyue" class="memory-image">
             </div>
-            <div class="memories-wall">
-                <div class="memory-card">
-                    <div class="memory-date">2025年3月19日</div>
-                    <div class="memory-content">认识的第100天，🌾给🍇送了一枚戒指💍</div>
-                    <img src="pic/戒指.jpg" loading="lazy"
-                            alt="戒指"
-                            class="memory-image">
+            
+            <div class="memory-card">
+                <div class="memory-date">2025年3月19日</div>
+                <div class="memory-content">认识的第100天，🌾给🍇送了一枚戒指💍</div>
+                <img src="pic/戒指.jpg" loading="lazy" alt="戒指" class="memory-image">
             </div>
+            
             <div class="memory-card">
                 <div class="memory-date">2025年3月9日</div>
                 <div class="memory-content">我焯这个小伙子太好了 和你绝配</div>
-                <img src="pic/小伙子.jpg" loading="lazy"
-                        alt="小伙子"
-                        class="memory-image">
+                <img src="pic/小伙子.jpg" loading="lazy" alt="小伙子" class="memory-image">
             </div>
+            
             <div class="memory-card">
                 <div class="memory-date">2025年3月8日</div>
                 <div class="memory-content">麦芽糖与小友期行，期日入。及酉未至，小友舍去，去后乃至。</div>
-                <img src="pic/草莓.jpg" loading="lazy"
-                        alt="草莓"
-                        class="memory-image">
+                <img src="pic/草莓.jpg" loading="lazy" alt="草莓" class="memory-image">
             </div>
+            
             <div class="memory-card">
                 <div class="memory-date">2025年2月18日</div>
                 <div class="memory-content">🌾愿意和小鳄鱼在一起吗^ ^</div>
-                <img src="pic/愿意吗.jpg" loading="lazy"
-                        alt="愿意吗"
-                        class="memory-image">
+                <img src="pic/愿意吗.jpg" loading="lazy" alt="愿意吗" class="memory-image">
             </div>
+            
             <div class="memory-card">
                 <div class="memory-date">2025年1月31日</div>
                 <div class="memory-content">写了很久的2048特别版，🌾通关咯</div>
-                <img src="pic/2048.jpg" loading="lazy"
-                        alt="2048"
-                        class="memory-image">
+                <img src="pic/2048.jpg" loading="lazy" alt="2048" class="memory-image">
             </div>
+            
             <div class="memory-card">
                 <div class="memory-date">2025年1月27日</div>
                 <div class="memory-content">长春的初雪❄️，🍇在雪上写了“LBY♥️MYT”</div>
-                <img src="pic/初雪.jpg" loading="lazy"
-                        alt="初雪"
-                        class="memory-image">
+                <img src="pic/初雪.jpg" loading="lazy" alt="初雪" class="memory-image">
             </div>
+            
             <div class="memory-card">
                 <div class="memory-date">2025年1月12日</div>
                 <div class="memory-content">🍇送🌾去高铁站，因为🍇不能进站还现场买了张高铁票哈哈</div>
-                <img src="pic/高铁站.jpg" loading="lazy"
-                alt="高铁站"
-                class="memory-image">
+                <img src="pic/高铁站.jpg" loading="lazy" alt="高铁站" class="memory-image">
             </div>
+            
             <div class="memory-card">
                 <div class="memory-date">2025年1月1日</div>
                 <div class="memory-content">🌾和🍇一起跨年^ ^</div>
             </div>
+            
             <div class="memory-card">
                 <div class="memory-date">2024年12月21日</div>
                 <div class="memory-content">不喜欢吃🍇但是愿意成为🍇科学家</div>
-                <img src="pic/葡萄科学家.jpg" loading="lazy"
-                     alt="葡萄科学家"
-                     class="memory-image">
+                <img src="pic/葡萄科学家.jpg" loading="lazy" alt="葡萄科学家" class="memory-image">
             </div>
+            
             <div class="memory-card">
                 <div class="memory-date">2024年12月14日</div>
                 <div class="memory-content">🍇惨惨的摔咯，收到了很多很多朋友的关心，🌾给🍇送了可爱的ckw宝宝，现在还挂在🍇的书包上</div>
             </div>
+            
             <div class="memory-card">
                 <div class="memory-date">2024年12月13日</div>
                 <div class="memory-content">🌾和🍇吃的第一顿漂亮饭^ ^</div>
-                <img src="pic/第一顿漂亮饭.jpg" loading="lazy"
-                     alt="第一顿漂亮饭"
-                     class="memory-image">
+                <img src="pic/第一顿漂亮饭.jpg" loading="lazy" alt="第一顿漂亮饭" class="memory-image">
             </div>
+            
             <div class="memory-card">
                 <div class="memory-date">2024年12月9日</div>
                 <div class="memory-content">🌾和🍇就是因为这个说说认识的哈哈</div>
-                <img src="pic/认识的.png" loading="lazy"
-                     alt="认识的"
-                     class="memory-image">
+                <img src="pic/认识的.png" loading="lazy" alt="认识的" class="memory-image">
             </div>
+            
             <div class="memory-card">
                 <div class="memory-date">2024年12月9日</div>
                 <div class="memory-content">🌾和🍇认识啦~</div>
-                <img src="pic/认识.jpg" loading="lazy"
-                     alt="认识"
-                     class="memory-image">
+                <img src="pic/认识.jpg" loading="lazy" alt="认识" class="memory-image">
             </div>
+            
             <div class="memory-card">
                 <div class="memory-date">开发日志：</div>
                 <div class="memory-content">2025年4月24日。完成了基本功能的开发。</div>
@@ -406,10 +379,7 @@
                 <div class="memory-content">2025年5月2日。丰富了大量内容。对项目层级进行优化，避免了.jpg和.png文件与.html文件同级，增加了项目的易维护性。</div>
                 <div class="memory-content">2025年5月3日。为所有图片添加了loading="lazy"属性，启用浏览器原生懒加载机制，大幅提升页面初始加载速度，优化了移动端性能体验。</div>
                 <div class="memory-content">2025年5月19日。优化性能，并且进一步丰富内容。</div>
-
-                <img src="pic/代码.png" loading="lazy"
-                     alt="代码"
-                     class="memory-image">
+                <img src="pic/代码.png" loading="lazy" alt="代码" class="memory-image">
             </div>
         </div>
     </div>
@@ -449,7 +419,6 @@
             document.getElementById('anniversaryCountdown').innerHTML = `
                 距离周年纪念日还有<br>${countdownDays} 天 ${countdownHours} 小时<br>一周年进度条👇
             `;
-
     
             // 计算进度百分比
             const totalTime = nextAnniversary - startDate;
@@ -468,7 +437,7 @@
     
         // 音乐自动播放处理
         document.addEventListener('click', function (e) {
-            // 只处理爱心动画，不控制音乐了！！
+            // 只处理爱心动画
             const hearts = ['❤️', '🧡', '💛', '💚', '💙', '💜'];
             const heart = document.createElement('div');
             heart.className = 'heart-animation';
@@ -483,10 +452,9 @@
         });
 
         // 音乐控制按钮逻辑
-            const musicButton = document.getElementById('musicButton');
-            const audio = document.getElementById('bgMusic');
+        const musicButton = document.getElementById('musicButton');
+        const audio = document.getElementById('bgMusic');
 
-            // 默认是播放状态
         // 默认不播放状态
         let isPlaying = false;
 
@@ -502,8 +470,6 @@
             }
             isPlaying = !isPlaying;
         });
-
     </script>
-    
 </body>
-</html>
+</html>    
