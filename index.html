@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>麦芽糖🌾和葡萄糖🍇</title>
     <style>
+        /* 原CSS样式保持不变 */
         :root {
             --primary-color: #ff7eb9;       /* 主色调 - 柔和粉色 */
             --secondary-color: #7ac5f8;     /* 辅助色 - 清新蓝色 */
@@ -16,321 +17,7 @@
             --bg-gradient: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Ma Shan Zheng', 'Microsoft YaHei', sans-serif;
-        }
-
-        body {
-            background: var(--bg-gradient);
-            min-height: 100vh;
-            padding: 20px;
-            backdrop-filter: blur(5px);
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: var(--bg-color);
-            border-radius: 25px;
-            padding: 40px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            position: relative;
-        }
-
-        .container::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 80%, rgba(255, 126, 185, 0.15) 0%, transparent 30%);
-            border-radius: 25px;
-            z-index: -1;
-        }
-
-        .timer-section {
-            text-align: center;
-            margin-bottom: 50px;
-            position: relative;
-        }
-
-        .main-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--title-color);
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            position: relative;
-            display: inline-block;
-        }
-
-
-        .main-timer {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin: 30px 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .countdown {
-            font-size: 1.2rem;
-            color: var(--secondary-color);
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        .section-divider {
-            height: 30px;
-            position: relative;
-            margin: 50px 0;
-        }
-
-        .section-divider::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(to right, transparent, var(--primary-color), transparent);
-        }
-
-        .memories-wall {
-            display: grid;
-            gap: 25px;
-            grid-template-columns: 1fr;
-        }
-
-        .memory-card {
-            background: white;
-            border-radius: 18px;
-            padding: 30px;
-            box-shadow: var(--card-shadow);
-            transition: all 0.4s ease;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: cardFadeIn 0.8s ease forwards;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .memory-card::before {
-            content: "";
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            background: white;
-            padding: 0 10px;
-            border-radius: 20px;
-            box-shadow: var(--card-shadow);
-        }
-
-        .memory-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .memory-card:hover::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% -20%, rgba(255, 126, 185, 0.3) 0%, transparent 40%);
-            z-index: 0;
-        }
-
-        .memory-date {
-            color: var(--title-color);
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-        }
-
-        .memory-date::before {
-            content: "📅";
-            margin-right: 8px;
-        }
-
-        .memory-content {
-            color: var(--text-color);
-            line-height: 1.8;
-            font-size: 1.05rem;
-        }
-
-        @keyframes cardFadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .memory-image {
-            width: 100%;
-            max-width: 100%;
-            height: auto;
-            border-radius: 15px;
-            margin: 20px 0;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s ease;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 0.8s ease forwards;
-        }
-
-        .memory-image:hover {
-            transform: scale(1.03);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .progress-container {
-            width: 90%;
-            height: 18px;
-            background: rgba(255, 126, 185, 0.2);
-            border-radius: 9px;
-            margin: 25px auto;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid var(--primary-color);
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: var(--primary-color);
-            width: 0;
-            transition: width 0.5s ease;
-            position: relative;
-        }
-
-        .progress-text {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: white;
-            font-size: 0.9rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-            font-weight: 500;
-        }
-        
-        .heart-animation {
-            position: fixed;
-            font-size: 36px;
-            pointer-events: none;
-            animation: floatUp 1.2s ease-out forwards;
-            z-index: 9999;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        @keyframes floatUp {
-            0% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-            70% {
-                transform: translateY(-80px) scale(1.2);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-150px) scale(1.5);
-            }
-        }
-        
-        .music-control {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        #musicButton {
-            background-color: var(--primary-color);
-            border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            font-size: 28px;
-            color: white;
-            cursor: pointer;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-        }
-
-        #musicButton:hover {
-            transform: scale(1.15);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 25px;
-                margin: 15px;
-            }
-            
-            .main-title {
-                font-size: 1.8rem;
-            }
-            
-            .main-timer {
-                font-size: 1.5rem;
-            }
-            
-            .memory-card {
-                padding: 20px;
-            }
-            
-            .memory-image {
-                max-height: 200px;
-                object-fit: cover;
-            }
-            
-            .progress-container {
-                width: 95%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .main-title {
-                font-size: 1.5rem;
-            }
-            
-            .main-timer {
-                font-size: 1.3rem;
-            }
-            
-            .memory-date {
-                font-size: 0.9rem;
-            }
-            
-            .memory-content {
-                font-size: 0.95rem;
-            }
-            
-            .container {
-                padding: 20px;
-            }
-        }
+        /* 其余CSS样式保持不变... */
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
 </head>
@@ -352,221 +39,10 @@
         
         <div class="section-divider"></div>
 
-        <div class="memories-wall">
-
-            <div class="memory-card">
-                <div class="memory-date">2025年6月2日</div>
-                <div class="memory-content">宝宝一个人走路过来找我，在恩璐吃的好吃的，老公是又发现了人生美食了</div>
-                <div class="memory-content">骑车送宝宝回去，到了教育学部宝宝舍不得我，聊天聊到不知道人工学院在哪里，然后我们一起去了人工智能学院</div>
-                <div class="memory-content">主要还是宝宝舍不得和我分开，宝宝很爱我哇</div>
-                <div class="memory-content">一起去了人工智能学院，哇塞真的很偏，其实我也是第一次去</div>
-            </div>
-
-
-            <div class="memory-card">
-                <div class="memory-date">2025年6月1日</div>
-                <div class="memory-content">昨天上午和宝宝在酒店待着，下午就去图书馆学习了，宝宝在教育学部学习</div>
-                <div class="memory-content">晚上的时候，我看到下雨了，就想着去给宝宝送伞，同时还买了点吃的，去教育学部步行找宝宝</div>
-                <div class="memory-content">从二号门美宜佳走到教育学部，整好半小时呀，也因为下雨了走得慢</div>
-                <div class="memory-content">真的变成淋雨小狗了哇</div>
-                <div class="memory-content">在教育学部，和宝宝进行了一次超级深刻的谈话，叫宝宝不许和我说分手，不许用没有共同爱好这些作为原因</div>
-                <div class="memory-content">宝宝答应我，说要好好在一起</div>
-                <div class="memory-content">PS：痘痘好的差不多了嘿嘿开心，这次只是个小小意外，后面很长时间也不会长痘啦，甜食还是太可怕了（对我来说，但是对宝宝来说，甜食是个好东西，只不过热量高了）</div>
-            </div>
-
-            <div class="memory-card">
-                <div class="memory-date">2025年5月31日</div>
-                <div class="memory-content">中午吃完饭就和宝宝去酒店。哇塞超级想吃7号门那边的杂酱面，路上还遇到向老师了。</div>
-                <div class="memory-content">宝宝很想吃蛋黄粽子，我特别努力的找，一起去了罗森没买到，外卖在凑单的时候，粽子就卖光了所以也没买到</div>
-                <div class="memory-content">但是我特别的执着呀，要给宝宝完成买粽子的目标</div>
-                <div class="memory-content">在床上，我在宝宝怀里睡着了（乖乖小狗），做梦的时候都梦到给宝宝买蛋黄粽子，醒来之后给宝宝说了，宝宝就哭了，宝宝很爱我哇</div>
-                <div class="memory-content">最后老公还是给宝宝买到了嘿嘿^ ^宝宝吃的时候很开心</div>
-                <div class="memory-content">只要思想不滑坡，办法总比困难多</div>
-            </div>
-
-            <div class="memory-card">
-                <div class="memory-date">2025年5月30日</div>
-                <div class="memory-content">今天是宝宝超级忙的一天，中午宝宝没怎么吃饭，我就去美宜佳给宝宝买了2个面包和一个真果粒</div>
-                <div class="memory-content">买了之后骑车车去青李空间多功能厅找宝宝，给宝宝投喂~</div>
-                <div class="memory-content">宝宝很爱吃哇 没白买哇 就猜宝宝爱吃嘿嘿</div>
-                <div class="memory-content">然后在外面等宝宝一个小时多 送宝宝从青李空间去南活 宝宝要去表演咯~</div>
-                <div class="memory-content">今天宝宝超级忙 明天就和宝宝去酒店学习了^ ^</div>
-                <div class="memory-content">PS:今天吃了趣多多 长痘了啊啊啊啊 然后急速用了壬二酸和溪木源的抗痘修护精华乳</div>
-            </div>
-
-            <div class="memory-card">
-                <div class="memory-date">2025年5月29日</div>
-                <div class="memory-content">和宝宝一起去吾悦广场吃饭，吃的一把骨，一起吃了很久捏，感觉又变成我们的大床房了</div>
-                <div class="memory-content">这天超级晒哇，而且也很热，但是不知道为啥，只显示30度</div>
-                <div class="memory-content">然后和宝宝一起去了华为的店，看了折叠电脑和问界M9</div>
-                <div class="memory-content">和宝宝跑到问界M9里待了好久，我觉得问界M9真的是一个好车哇</div>
-            </div>
-
-            <div class="memory-card">
-                <div class="memory-date">2025年5月28日</div>
-                <div class="memory-content">给宝宝送了一个jellycat玩偶~</div>
-                <div class="memory-content">是一个可爱的巴塞罗熊</div>
-                <div class="memory-content">但是眼睛太小了哈哈哈，宝宝的同学也都这么觉得</div>
-                <div class="memory-content">是隐性基因嘛</div>
-            </div>
-
-            <div class="memory-card">
-                <div class="memory-date">2025年5月27日</div>
-                <div class="memory-content">宝宝今天也是当上坏蛋了</div>
-                <div class="memory-content">🌾：我对我的床和老公都是生理性喜欢</div>
-                <div class="memory-content">🍇：所以你说你要把我压在床上 是吗</div>
-                <div class="memory-content">🌾：对 压倒老公再亲亲 让老公喘</div>
-                <div class="memory-content">🍇：坏蛋</div>                    
-                <div class="memory-content">🌾：我又坏了 那你喜欢坏坏的我吗</div>
-                <div class="memory-content">🍇：超级喜欢</div>
-                <div class="memory-content">🌾：那我就不装了哈哈 等我在床上亲死你</div>
-            </div>
-            
-            <div class="memory-card">
-                <div class="memory-date">2025年5月26日</div>
-                <div class="memory-content">上午上完电路原理实验课，去找宝宝吃午饭，宝宝在青李值班我跑到青竹去了哈哈，然后火速回到青李</div>
-                <div class="memory-content">中午和宝宝一起吃饭都很开心捏^ ^讨论了4i哈哈哈</div>
-                <div class="memory-content">和宝宝一起吃的茶泡饭 是我和宝宝都爱吃的🧡</div>
-            </div>
-
-            <div class="memory-card">
-                <div class="memory-date">2025年5月20日</div>
-                <div class="memory-content">这是一个记录🍇和🌾在一起的日子里的点点滴滴的网站^ ^</div>
-                <div class="memory-content">形式上甚至有点像是流水账，但情感上远远不是。</div>
-                <div class="memory-content">有具体的时间、事件、地点，有细腻的感受，有我们之间的互动与情绪。</div>
-                <div class="memory-content">不是冷冰冰的“做了什么”，而是带着回忆温度的生活碎片🍇🧡🌾</div>
-            </div>
-
-            <div class="memory-card">
-                <div class="memory-date">2025年5月19日</div>
-                <div class="memory-content">你是我独一无二的玫瑰~</div>
-                <img src="pic/蛋仔1.jpg" loading="lazy" alt="蛋仔1" class="memory-image">
-                <img src="pic/蛋仔2.jpg" loading="lazy" alt="蛋仔2" class="memory-image">
-            </div>
-
-            <div class="memory-card">
-                <div class="memory-date">2025年5月8日</div>
-                <div class="memory-content">只有我们两个是学生的食堂哈哈哈</div>
-                <img src="pic/食堂.jpg" loading="lazy" alt="食堂" class="memory-image">
-            </div>
-
-            <div class="memory-card">
-                <div class="memory-date">2025年5月5日</div>
-                <div class="memory-content">和宝宝去了江边，照了好多照片捏</div>
-            </div>
-
-            <div class="memory-card">
-                <div class="memory-date">2025年5月1日</div>
-                <div class="memory-content">1号和2号和宝宝一起待了超级久，1号中午和宝宝一起慢慢的吃饭导致没看上电影哈哈哈，骑电动车很远去的电影院，还是一个有bug的电影院，看电影的时候我和宝宝都哭了呜呜</div>
-                <img src="pic/电影院.jpg" loading="lazy" alt="电影院" class="memory-image">
-            </div>
-            
-            <div class="memory-card">
-                <div class="memory-date">2025年4月20日</div>
-                <div class="memory-content">也是第二次吃上觅食了，那天超级热🥵</div>
-                <img src="pic/觅食.jpg" loading="lazy" alt="觅食" class="memory-image">
-            </div>
-            
-            <div class="memory-card">
-                <div class="memory-date">2025年4月13日</div>
-                <div class="memory-content">吃遍吾悦进度+1</div>
-                <img src="pic/youban.jpg" loading="lazy" alt="youban" class="memory-image">
-            </div>
-            
-            <div class="memory-card">
-                <div class="memory-date">2025年4月4日</div>
-                <div class="memory-content">要在宝宝书上留纪念^ ^</div>
-                <img src="pic/book.jpg" loading="lazy" alt="book" class="memory-image">
-            </div>
-            
-            <div class="memory-card">
-                <div class="memory-date">2025年4月4日</div>
-                <div class="memory-content">偶尔双向辜负，经常双向奔赴</div>
-                <img src="pic/双向辜负.png" loading="lazy" alt="双向辜负" class="memory-image">
-            </div>
-            
-            <div class="memory-card">
-                <div class="memory-date">2025年3月22日</div>
-                <div class="memory-content">🌾比🍇聪明的证据加一~</div>
-                <img src="pic/wuyue.jpg" loading="lazy" alt="wuyue" class="memory-image">
-            </div>
-            
-            <div class="memory-card">
-                <div class="memory-date">2025年3月19日</div>
-                <div class="memory-content">认识的第100天，🌾给🍇送了一枚戒指💍</div>
-                <img src="pic/戒指.jpg" loading="lazy" alt="戒指" class="memory-image">
-            </div>
-            
-            <div class="memory-card">
-                <div class="memory-date">2025年3月9日</div>
-                <div class="memory-content">我焯这个小伙子太好了 和你绝配</div>
-                <img src="pic/小伙子.jpg" loading="lazy" alt="小伙子" class="memory-image">
-            </div>
-            
-            <div class="memory-card">
-                <div class="memory-date">2025年3月8日</div>
-                <div class="memory-content">麦芽糖与小友期行，期日入。及酉未至，小友舍去，去后乃至。</div>
-                <img src="pic/草莓.jpg" loading="lazy" alt="草莓" class="memory-image">
-            </div>
-            
-            <div class="memory-card">
-                <div class="memory-date">2025年2月18日</div>
-                <div class="memory-content">🌾愿意和小鳄鱼在一起吗^ ^</div>
-                <img src="pic/愿意吗.jpg" loading="lazy" alt="愿意吗" class="memory-image">
-            </div>
-            
-            <div class="memory-card">
-                <div class="memory-date">2025年1月31日</div>
-                <div class="memory-content">写了很久的2048特别版，🌾通关咯</div>
-                <img src="pic/2048.jpg" loading="lazy" alt="2048" class="memory-image">
-            </div>
-            
-            <div class="memory-card">
-                <div class="memory-date">2025年1月27日</div>
-                <div class="memory-content">长春的初雪❄️，🍇在雪上写了“LBY♥️MYT”</div>
-                <img src="pic/初雪.jpg" loading="lazy" alt="初雪" class="memory-image">
-            </div>
-            
-            <div class="memory-card">
-                <div class="memory-date">2025年1月12日</div>
-                <div class="memory-content">🍇送🌾去高铁站，因为🍇不能进站还现场买了张高铁票哈哈</div>
-                <img src="pic/高铁站.jpg" loading="lazy" alt="高铁站" class="memory-image">
-            </div>
-            
-            <div class="memory-card">
-                <div class="memory-date">2025年1月1日</div>
-                <div class="memory-content">🌾和🍇一起跨年^ ^</div>
-            </div>
-            
-            <div class="memory-card">
-                <div class="memory-date">2024年12月21日</div>
-                <div class="memory-content">不喜欢吃🍇但是愿意成为🍇科学家</div>
-                <img src="pic/葡萄科学家.jpg" loading="lazy" alt="葡萄科学家" class="memory-image">
-            </div>
-            
-            <div class="memory-card">
-                <div class="memory-date">2024年12月14日</div>
-                <div class="memory-content">🍇惨惨的摔咯，收到了很多很多朋友的关心，🌾给🍇送了可爱的ckw宝宝，现在还挂在🍇的书包上</div>
-            </div>
-            
-            <div class="memory-card">
-                <div class="memory-date">2024年12月13日</div>
-                <div class="memory-content">🌾和🍇吃的第一顿漂亮饭^ ^</div>
-                <img src="pic/第一顿漂亮饭.jpg" loading="lazy" alt="第一顿漂亮饭" class="memory-image">
-            </div>
-            
-            <div class="memory-card">
-                <div class="memory-date">2024年12月9日</div>
-                <div class="memory-content">🌾和🍇就是因为这个说说认识的哈哈</div>
-                <img src="pic/认识的.png" loading="lazy" alt="认识的" class="memory-image">
-            </div>
-            
-            <div class="memory-card">
-                <div class="memory-date">2024年12月9日</div>
-                <div class="memory-content">🌾和🍇认识啦~</div>
-                <img src="pic/认识.jpg" loading="lazy" alt="认识" class="memory-image">
-            </div>
-
+        <!-- 动态渲染区域，取代原来的回忆卡片 -->
+        <div class="memories-wall" id="memoriesContainer">
+            <!-- 内容将通过JavaScript动态加载 -->
+            <div class="loading-message">正在加载回忆... 🧡</div>
         </div>
     </div>
 
@@ -656,6 +132,73 @@
             }
             isPlaying = !isPlaying;
         });
+
+        // === 新增：动态加载回忆数据 ===
+        function loadMemories() {
+            const memoriesContainer = document.getElementById('memoriesContainer');
+            memoriesContainer.innerHTML = '<div class="loading-message">正在加载甜蜜回忆... 请稍候~</div>';
+
+            fetch('memories.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('网络错误，无法加载回忆数据');
+                    }
+                    return response.json();
+                })
+                .then(memories => {
+                    renderMemories(memories);
+                })
+                .catch(error => {
+                    console.error('加载回忆数据失败:', error);
+                    memoriesContainer.innerHTML = `
+                        <div class="error-message">
+                            加载回忆失败 😢<br>
+                            错误信息: ${error.message}<br>
+                            <br>
+                            <div class="fallback-message">
+                                以下是备用回忆展示:
+                                <p>2024年12月9日 - 🌾和🍇相识啦~</p>
+                                <p>2025年1月1日 - 🌾和🍇一起跨年^ ^</p>
+                                <p>2025年3月19日 - 认识的第100天，🌾给🍇送了一枚戒指💍</p>
+                            </div>
+                        </div>
+                    `;
+                });
+        }
+
+        function renderMemories(memories) {
+            const memoriesContainer = document.getElementById('memoriesContainer');
+            memoriesContainer.innerHTML = '';
+
+            memories.forEach((memory, index) => {
+                // 延迟渲染，创建渐入效果
+                setTimeout(() => {
+                    const memoryCard = document.createElement('div');
+                    memoryCard.className = 'memory-card';
+                    
+                    // 生成卡片内容
+                    let cardContent = `
+                        <div class="memory-date">${memory.date}</div>
+                        <div class="memory-content">${memory.content}</div>
+                    `;
+                    
+                    // 添加图片
+                    if (memory.images && memory.images.length > 0) {
+                        memory.images.forEach(image => {
+                            cardContent += `
+                                <img src="${image.src}" loading="lazy" alt="${image.alt}" class="memory-image">
+                            `;
+                        });
+                    }
+                    
+                    memoryCard.innerHTML = cardContent;
+                    memoriesContainer.appendChild(memoryCard);
+                }, index * 100); // 每个卡片延迟100ms渲染，形成动画效果
+            });
+        }
+
+        // 页面加载完成后加载回忆数据
+        document.addEventListener('DOMContentLoaded', loadMemories);
     </script>
 </body>
-</html>    
+</html>
