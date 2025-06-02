@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>麦芽糖🌾和葡萄糖🍇</title>
     <style>
-        /* 原CSS样式保持不变 */
         :root {
             --primary-color: #ff7eb9;       /* 主色调 - 柔和粉色 */
             --secondary-color: #7ac5f8;     /* 辅助色 - 清新蓝色 */
@@ -17,7 +16,321 @@
             --bg-gradient: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
         }
 
-        /* 其余CSS样式保持不变... */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Ma Shan Zheng', 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--bg-color);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(255, 126, 185, 0.15) 0%, transparent 30%);
+            border-radius: 25px;
+            z-index: -1;
+        }
+
+        .timer-section {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .main-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--title-color);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            display: inline-block;
+        }
+
+
+        .main-timer {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 30px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .countdown {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .section-divider {
+            height: 30px;
+            position: relative;
+            margin: 50px 0;
+        }
+
+        .section-divider::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+        }
+
+        .memories-wall {
+            display: grid;
+            gap: 25px;
+            grid-template-columns: 1fr;
+        }
+
+        .memory-card {
+            background: white;
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: cardFadeIn 0.8s ease forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .memory-card::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            background: white;
+            padding: 0 10px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .memory-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .memory-card:hover::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% -20%, rgba(255, 126, 185, 0.3) 0%, transparent 40%);
+            z-index: 0;
+        }
+
+        .memory-date {
+            color: var(--title-color);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .memory-date::before {
+            content: "📅";
+            margin-right: 8px;
+        }
+
+        .memory-content {
+            color: var(--text-color);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        @keyframes cardFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .memory-image {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .memory-image:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .progress-container {
+            width: 90%;
+            height: 18px;
+            background: rgba(255, 126, 185, 0.2);
+            border-radius: 9px;
+            margin: 25px auto;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--primary-color);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--primary-color);
+            width: 0;
+            transition: width 0.5s ease;
+            position: relative;
+        }
+
+        .progress-text {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 0.9rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            font-weight: 500;
+        }
+        
+        .heart-animation {
+            position: fixed;
+            font-size: 36px;
+            pointer-events: none;
+            animation: floatUp 1.2s ease-out forwards;
+            z-index: 9999;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            70% {
+                transform: translateY(-80px) scale(1.2);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-150px) scale(1.5);
+            }
+        }
+        
+        .music-control {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        #musicButton {
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 28px;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        #musicButton:hover {
+            transform: scale(1.15);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+                margin: 15px;
+            }
+            
+            .main-title {
+                font-size: 1.8rem;
+            }
+            
+            .main-timer {
+                font-size: 1.5rem;
+            }
+            
+            .memory-card {
+                padding: 20px;
+            }
+            
+            .memory-image {
+                max-height: 200px;
+                object-fit: cover;
+            }
+            
+            .progress-container {
+                width: 95%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 1.5rem;
+            }
+            
+            .main-timer {
+                font-size: 1.3rem;
+            }
+            
+            .memory-date {
+                font-size: 0.9rem;
+            }
+            
+            .memory-content {
+                font-size: 0.95rem;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
 </head>
@@ -39,11 +352,7 @@
         
         <div class="section-divider"></div>
 
-        <!-- 动态渲染区域，取代原来的回忆卡片 -->
-        <div class="memories-wall" id="memoriesContainer">
-            <!-- 内容将通过JavaScript动态加载 -->
-            <div class="loading-message">正在加载回忆... 🧡</div>
-        </div>
+        <div class="memories-wall" id="memoriesContainer"></div>
     </div>
 
     <audio id="bgMusic" loop>
@@ -133,72 +442,66 @@
             isPlaying = !isPlaying;
         });
 
-        // === 新增：动态加载回忆数据 ===
-        function loadMemories() {
-            const memoriesContainer = document.getElementById('memoriesContainer');
-            memoriesContainer.innerHTML = '<div class="loading-message">正在加载甜蜜回忆... 请稍候~</div>';
-
-            fetch('memories.json')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('网络错误，无法加载回忆数据');
-                    }
-                    return response.json();
-                })
-                .then(memories => {
-                    renderMemories(memories);
-                })
-                .catch(error => {
-                    console.error('加载回忆数据失败:', error);
-                    memoriesContainer.innerHTML = `
-                        <div class="error-message">
-                            加载回忆失败 😢<br>
-                            错误信息: ${error.message}<br>
-                            <br>
-                            <div class="fallback-message">
-                                以下是备用回忆展示:
-                                <p>2024年12月9日 - 🌾和🍇相识啦~</p>
-                                <p>2025年1月1日 - 🌾和🍇一起跨年^ ^</p>
-                                <p>2025年3月19日 - 认识的第100天，🌾给🍇送了一枚戒指💍</p>
-                            </div>
-                        </div>
-                    `;
-                });
+        // 加载回忆数据
+        async function loadMemories() {
+            try {
+                const response = await fetch('memories.json');
+                if (!response.ok) {
+                    throw new Error('无法加载回忆数据');
+                }
+                const memories = await response.json();
+                renderMemories(memories);
+            } catch (error) {
+                console.error('加载回忆数据时出错:', error);
+                document.getElementById('memoriesContainer').innerHTML = '<div class="memory-card"><div class="memory-content">加载回忆数据失败，请稍后再试。</div></div>';
+            }
         }
 
+        // 渲染回忆数据
         function renderMemories(memories) {
-            const memoriesContainer = document.getElementById('memoriesContainer');
-            memoriesContainer.innerHTML = '';
+            const container = document.getElementById('memoriesContainer');
+            container.innerHTML = '';
 
             memories.forEach((memory, index) => {
-                // 延迟渲染，创建渐入效果
-                setTimeout(() => {
-                    const memoryCard = document.createElement('div');
-                    memoryCard.className = 'memory-card';
+                const card = document.createElement('div');
+                card.className = 'memory-card';
+                card.style.animationDelay = `${index * 0.1}s`;
+
+                // 创建日期元素
+                const dateElement = document.createElement('div');
+                dateElement.className = 'memory-date';
+                dateElement.textContent = memory.date;
+                card.appendChild(dateElement);
+
+                // 创建内容元素
+                if (memory.content) {
+                    const contentElement = document.createElement('div');
+                    contentElement.className = 'memory-content';
                     
-                    // 生成卡片内容
-                    let cardContent = `
-                        <div class="memory-date">${memory.date}</div>
-                        <div class="memory-content">${memory.content}</div>
-                    `;
-                    
-                    // 添加图片
-                    if (memory.images && memory.images.length > 0) {
-                        memory.images.forEach(image => {
-                            cardContent += `
-                                <img src="${image.src}" loading="lazy" alt="${image.alt}" class="memory-image">
-                            `;
-                        });
-                    }
-                    
-                    memoryCard.innerHTML = cardContent;
-                    memoriesContainer.appendChild(memoryCard);
-                }, index * 100); // 每个卡片延迟100ms渲染，形成动画效果
+                    // 将换行符转换为<br>
+                    contentElement.innerHTML = memory.content.replace(/\n/g, '<br>');
+                    card.appendChild(contentElement);
+                }
+
+                // 创建图片元素
+                if (memory.images && memory.images.length > 0) {
+                    memory.images.forEach(image => {
+                        const imgElement = document.createElement('img');
+                        imgElement.src = image.src;
+                        imgElement.alt = image.alt || '回忆图片';
+                        imgElement.className = 'memory-image';
+                        imgElement.loading = 'lazy';
+                        imgElement.style.animationDelay = `${index * 0.1 + 0.2}s`;
+                        card.appendChild(imgElement);
+                    });
+                }
+
+                container.appendChild(card);
             });
         }
 
-        // 页面加载完成后加载回忆数据
+        // 页面加载时初始化
         document.addEventListener('DOMContentLoaded', loadMemories);
     </script>
 </body>
-</html>
+</html>    
