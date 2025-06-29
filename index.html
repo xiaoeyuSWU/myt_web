@@ -17,7 +17,11 @@
             --priority-high: #ff6b6b;       /* 高优先级颜色 */
             --priority-medium: #ffaa55;     /* 中优先级颜色 */
             --priority-low: #4ecdc4;        /* 低优先级颜色 */
+            --search-bg: rgba(255, 255, 255, 0.8);
+            --search-border: 2px solid var(--primary-color);
+            --search-focus: rgba(255, 126, 185, 0.3);
         }
+
 
         * {
             margin: 0;
@@ -26,6 +30,7 @@
             font-family: 'Ma Shan Zheng', 'Microsoft YaHei', sans-serif;
         }
 
+
         body {
             background: var(--bg-gradient);
             min-height: 100vh;
@@ -33,6 +38,7 @@
             backdrop-filter: blur(5px);
             overflow-x: hidden;
         }
+
 
         .container {
             max-width: 900px;
@@ -44,6 +50,7 @@
             backdrop-filter: blur(10px);
             position: relative;
         }
+
 
         .container::before {
             content: "";
@@ -57,11 +64,13 @@
             z-index: -1;
         }
 
+
         .timer-section {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 30px;
             position: relative;
         }
+
 
         .main-title {
             font-size: 2.2rem;
@@ -73,6 +82,7 @@
             display: inline-block;
         }
 
+
         .main-timer {
             font-size: 1.8rem;
             font-weight: 600;
@@ -81,6 +91,7 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
+
         .countdown {
             font-size: 1.2rem;
             color: var(--secondary-color);
@@ -88,11 +99,13 @@
             line-height: 1.6;
         }
 
+
         .section-divider {
             height: 30px;
             position: relative;
             margin: 50px 0;
         }
+
 
         .section-divider::before {
             content: "";
@@ -104,11 +117,13 @@
             background: linear-gradient(to right, transparent, var(--primary-color), transparent);
         }
 
+
         .memories-wall {
             display: grid;
             gap: 25px;
             grid-template-columns: 1fr;
         }
+
 
         .memory-card {
             background: white;
@@ -121,7 +136,15 @@
             animation: cardFadeIn 0.8s ease forwards;
             position: relative;
             overflow: hidden;
+            display: none; /* 初始隐藏，通过搜索显示 */
         }
+
+
+        .memory-card.show {
+            display: block;
+            animation: cardFadeIn 0.8s ease forwards;
+        }
+
 
         .memory-card::before {
             content: "";
@@ -136,10 +159,12 @@
             box-shadow: var(--card-shadow);
         }
 
+
         .memory-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05);
         }
+
 
         .memory-card:hover::after {
             content: "";
@@ -152,6 +177,7 @@
             z-index: 0;
         }
 
+
         .memory-date {
             color: var(--title-color);
             font-size: 1rem;
@@ -161,10 +187,12 @@
             align-items: center;
         }
 
+
         .memory-date::before {
             content: "📅";
             margin-right: 8px;
         }
+
 
         .memory-content {
             color: var(--text-color);
@@ -173,12 +201,22 @@
             font-weight: 600;
         }
 
+
+        .highlight {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0 3px;
+            border-radius: 3px;
+        }
+
+
         @keyframes cardFadeIn {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
+
 
         .memory-image {
             width: 100%;
@@ -193,10 +231,12 @@
             animation: fadeIn 0.8s ease forwards;
         }
 
+
         .memory-image:hover {
             transform: scale(1.03);
             box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
         }
+
 
         @keyframes fadeIn {
             to {
@@ -204,6 +244,7 @@
                 transform: translateY(0);
             }
         }
+
 
         .progress-container {
             width: 90%;
@@ -216,6 +257,7 @@
             border: 2px solid var(--primary-color);
         }
 
+
         .progress-bar {
             height: 100%;
             background: var(--primary-color);
@@ -223,6 +265,7 @@
             transition: width 0.5s ease;
             position: relative;
         }
+
 
         .progress-text {
             position: absolute;
@@ -244,6 +287,7 @@
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
+
         @keyframes floatUp {
             0% {
                 opacity: 1;
@@ -263,6 +307,7 @@
             margin-top: 30px;
         }
 
+
         #musicButton {
             background-color: var(--primary-color);
             border: none;
@@ -280,15 +325,18 @@
             margin: 0 auto;
         }
 
+
         #musicButton:hover {
             transform: scale(1.15);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
+
         /* 待办事项样式 */
         .todo-section {
             margin-top: 50px;
         }
+
 
         .todo-title {
             font-size: 1.8rem;
@@ -299,12 +347,14 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
+
         .todo-list {
             display: grid;
             gap: 25px; /* 与回忆卡片间距保持一致 */
             grid-template-columns: 1fr;
             margin: 25px 0; /* 增加上下边距 */
         }
+
 
         .todo-card {
             background: white;
@@ -316,17 +366,20 @@
             overflow: hidden;
         }
 
+
         .todo-header {
             display: flex;
             align-items: center;
             margin-bottom: 15px;
         }
 
+
         .todo-title-text {
             font-size: 1.1rem;
             font-weight: 600;
             color: var(--text-color);
         }
+
 
         .todo-content {
             color: var(--text-color);
@@ -335,6 +388,7 @@
             margin-bottom: 15px;
         }
 
+
         .todo-date {
             font-size: 0.9rem;
             color: var(--title-color);
@@ -342,10 +396,12 @@
             align-items: center;
         }
 
+
         .todo-date::before {
             content: "📅";
             margin-right: 5px;
         }
+
 
         /* 回忆标题样式 */
         .memories-title {
@@ -356,6 +412,93 @@
             text-align: center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
+
+
+        /* 搜索功能样式 */
+        .search-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            transition: all 0.3s ease;
+        }
+
+
+        .search-box {
+            width: 100%;
+            padding: 15px 20px 15px 50px;
+            border: var(--search-border);
+            border-radius: 30px;
+            background: var(--search-bg);
+            font-size: 1.1rem;
+            color: var(--text-color);
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 126, 185, 0.15);
+        }
+
+
+        .search-box:focus {
+            border-color: var(--primary-color);
+            background: white;
+            box-shadow: 0 8px 25px rgba(255, 126, 185, 0.2);
+            outline: none;
+        }
+
+
+        .search-box::placeholder {
+            color: rgba(85, 85, 85, 0.6);
+        }
+
+
+        .search-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            pointer-events: none;
+        }
+
+
+        .search-clear {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+
+        .search-box:focus + .search-clear,
+        .search-box:not(:placeholder-shown) + .search-clear {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+
+        .search-results-count {
+            text-align: center;
+            color: var(--title-color);
+            font-size: 1.1rem;
+            margin: 15px 0;
+            display: none;
+        }
+
+
+        .no-results {
+            text-align: center;
+            color: var(--priority-high);
+            font-size: 1.1rem;
+            margin: 30px 0;
+            display: none;
+        }
+
 
         @media (max-width: 768px) {
             .container {
@@ -384,13 +527,16 @@
                 width: 95%;
             }
 
+
             .todo-card {
                 padding: 20px;
             }
 
+
             .todo-title-text {
                 font-size: 1rem;
             }
+
 
             .todo-content {
                 font-size: 0.95rem;
@@ -399,7 +545,17 @@
             .memories-title {
                 font-size: 1.6rem;
             }
+            
+            .search-box {
+                padding: 12px 15px 12px 45px;
+                font-size: 1rem;
+            }
+            
+            .search-icon {
+                font-size: 1.3rem;
+            }
         }
+
 
         @media (max-width: 480px) {
             .main-title {
@@ -425,6 +581,11 @@
             .memories-title {
                 font-size: 1.4rem;
             }
+            
+            .search-box {
+                padding: 10px 12px 10px 40px;
+                font-size: 0.9rem;
+            }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
@@ -440,12 +601,24 @@
                     <div class="progress-text" id="progressText">0%</div>
                 </div>
             </div>
+            
+            <!-- 搜索功能 -->
+            <div class="search-container">
+                <input type="text" class="search-box" id="searchBox" placeholder="搜索回忆或日期...">
+                <span class="search-icon"></span>
+                <span class="search-clear" id="searchClear">✖</span>
+            </div>
+            
+            <div class="search-results-count" id="searchResultsCount"></div>
+            <div class="no-results" id="noResults">没有找到相关回忆 😔</div>
+            
             <div class="music-control">
                 <button id="musicButton">🔇</button>
             </div>
         </div>
         
         <div class="section-divider"></div>
+
 
         <!-- 待办事项模块 -->
         <div class="todo-section">
@@ -467,6 +640,7 @@
                 </div>
             </div>
 
+
             <div class="todo-list" id="todoList2">
                 <div class="todo-card">
                     <div class="todo-header">
@@ -483,6 +657,24 @@
                 </div>
             </div>
 
+
+            <div class="todo-list" id="todoList2">
+                <div class="todo-card">
+                    <div class="todo-header">
+                        <h3 class="todo-title-text">一起看日出</h3>
+                    </div>
+                    
+                    <div class="todo-content">
+                        去缙云山一起看日出。上次葡萄和朋友们一起去过但是没看到日出呜呜，因为那天多云。和宝宝选个好日子一起去^ ^
+                    </div>
+                    
+                    <div class="todo-date">
+                        大二上学期
+                    </div>
+                </div>
+            </div>
+
+
             <div class="todo-list" id="todoList2">
                 <div class="todo-card">
                     <div class="todo-header">
@@ -498,12 +690,11 @@
                     </div>
                 </div>
             </div>
-
-
-
         </div>
 
+
         <div class="section-divider"></div>
+
 
         <!-- 回忆模块 -->
         <div class="memories-section">
@@ -566,20 +757,30 @@
             heart.className = 'heart-animation';
             heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
 
+
             const fontSize = 36;
             heart.style.left = `${e.pageX - fontSize / 2}px`;
             heart.style.top = `${e.pageY - fontSize / 2}px`;
+
 
             document.body.appendChild(heart);
             setTimeout(() => heart.remove(), 1200);
         });
 
+
         // 音乐控制按钮逻辑
         const musicButton = document.getElementById('musicButton');
-        const audio = document.getElementById('bgMusic');
+        const audio = document.createElement('audio');
+        audio.id = 'bgMusic';
+        audio.src = 'your-music-url.mp3'; // 实际使用时替换为音乐文件路径
+        audio.loop = true;
+        audio.volume = 0.3;
+        document.body.appendChild(audio);
+
 
         // 默认不播放状态
         let isPlaying = false;
+
 
         musicButton.addEventListener('click', function () {
             if (isPlaying) {
@@ -595,6 +796,16 @@
             isPlaying = !isPlaying;
         });
 
+
+        // 搜索功能实现
+        const searchBox = document.getElementById('searchBox');
+        const searchClear = document.getElementById('searchClear');
+        const searchResultsCount = document.getElementById('searchResultsCount');
+        const noResults = document.getElementById('noResults');
+        const memoriesContainer = document.getElementById('memoriesContainer');
+        
+        let allMemories = []; // 存储所有回忆数据
+        
         // 加载回忆数据
         async function loadMemories() {
             try {
@@ -602,29 +813,40 @@
                 if (!response.ok) {
                     throw new Error('无法加载回忆数据');
                 }
-                const memories = await response.json();
-                renderMemories(memories);
+                allMemories = await response.json();
+                renderMemories(allMemories);
+                setupSearch();
             } catch (error) {
                 console.error('加载回忆数据时出错:', error);
-                document.getElementById('memoriesContainer').innerHTML = '<div class="memory-card"><div class="memory-content">加载回忆数据失败，请稍后再试。</div></div>';
+                memoriesContainer.innerHTML = '<div class="memory-card"><div class="memory-content">加载回忆数据失败，请稍后再试。</div></div>';
             }
         }
+
 
         // 渲染回忆数据
         function renderMemories(memories) {
             const container = document.getElementById('memoriesContainer');
             container.innerHTML = '';
 
+
             memories.forEach((memory, index) => {
                 const card = document.createElement('div');
                 card.className = 'memory-card';
+                card.dataset.id = index;
                 card.style.animationDelay = `${index * 0.1}s`;
+                card.dataset.date = memory.date;
+                card.dataset.content = memory.content ? memory.content : '';
+                
+                // 合并所有可搜索的文本
+                const searchText = [memory.date, memory.content || ''].join(' ').toLowerCase();
+                card.dataset.search = searchText;
 
                 // 创建日期元素
                 const dateElement = document.createElement('div');
                 dateElement.className = 'memory-date';
                 dateElement.textContent = memory.date;
                 card.appendChild(dateElement);
+
 
                 // 创建内容元素
                 if (memory.content) {
@@ -635,6 +857,7 @@
                     contentElement.innerHTML = memory.content.replace(/\n/g, '<br>');
                     card.appendChild(contentElement);
                 }
+
 
                 // 创建图片元素
                 if (memory.images && memory.images.length > 0) {
@@ -649,9 +872,174 @@
                     });
                 }
 
+
                 container.appendChild(card);
             });
+            
+            // 初始显示所有卡片
+            document.querySelectorAll('.memory-card').forEach(card => {
+                card.classList.add('show');
+            });
         }
+
+
+        // 设置搜索功能
+        function setupSearch() {
+            // 搜索输入监听
+            searchBox.addEventListener('input', debounce(searchMemories, 300));
+            
+            // 搜索按钮点击（图标点击）
+            document.querySelector('.search-icon').addEventListener('click', searchMemories);
+            
+            // 清除按钮点击
+            searchClear.addEventListener('click', clearSearch);
+            
+            // 回车键搜索
+            searchBox.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchMemories();
+                }
+            });
+        }
+
+
+        // 搜索回忆
+        function searchMemories() {
+            const query = searchBox.value.trim().toLowerCase();
+            if (query === '') {
+                // 清空搜索，显示所有
+                showAllMemories();
+                return;
+            }
+            
+            // 分割多关键词
+            const keywords = query.split(/\s+/).filter(keyword => keyword !== '');
+            if (keywords.length === 0) {
+                showAllMemories();
+                return;
+            }
+            
+            // 过滤匹配的回忆
+            const matchedMemories = allMemories.filter(memory => {
+                const searchText = [memory.date, memory.content || ''].join(' ').toLowerCase();
+                return keywords.every(keyword => searchText.includes(keyword));
+            });
+            
+            // 显示搜索结果
+            displaySearchResults(matchedMemories, keywords);
+        }
+
+
+        // 显示搜索结果
+        function displaySearchResults(matchedMemories, keywords) {
+            const memoryCards = document.querySelectorAll('.memory-card');
+            let showCount = 0;
+            
+            memoryCards.forEach(card => {
+                const searchText = card.dataset.search;
+                const matches = keywords.every(keyword => searchText.includes(keyword));
+                
+                if (matches) {
+                    // 显示匹配的卡片并高亮关键词
+                    card.classList.add('show');
+                    highlightKeywords(card, keywords);
+                    showCount++;
+                } else {
+                    card.classList.remove('show');
+                }
+            });
+            
+            // 更新结果计数
+            if (showCount > 0) {
+                searchResultsCount.textContent = `找到 ${showCount} 条相关回忆`;
+                searchResultsCount.style.display = 'block';
+                noResults.style.display = 'none';
+            } else {
+                searchResultsCount.style.display = 'none';
+                noResults.style.display = 'block';
+            }
+        }
+
+
+        // 高亮关键词
+        function highlightKeywords(element, keywords) {
+            if (element.classList.contains('memory-date')) {
+                highlightText(element, keywords);
+            } else if (element.classList.contains('memory-content')) {
+                highlightText(element, keywords);
+            } else {
+                // 递归处理子元素
+                for (let i = 0; i < element.children.length; i++) {
+                    highlightKeywords(element.children[i], keywords);
+                }
+            }
+        }
+
+
+        function highlightText(element, keywords) {
+            if (element.nodeType === 3) { // 文本节点
+                let text = element.textContent;
+                let highlighted = text;
+                
+                keywords.forEach(keyword => {
+                    const regex = new RegExp(`(${keyword})`, 'gi');
+                    highlighted = highlighted.replace(regex, '<span class="highlight">$1</span>');
+                });
+                
+                if (highlighted !== text) {
+                    element.parentElement.innerHTML = highlighted;
+                }
+            } else if (element.nodeType === 1 && !element.classList.contains('highlight')) { // 元素节点
+                for (let i = 0; i < element.children.length; i++) {
+                    highlightKeywords(element.children[i], keywords);
+                }
+            }
+        }
+
+
+        // 显示所有回忆
+        function showAllMemories() {
+            document.querySelectorAll('.memory-card').forEach(card => {
+                card.classList.add('show');
+                // 清除高亮
+                removeHighlights(card);
+            });
+            
+            searchResultsCount.style.display = 'none';
+            noResults.style.display = 'none';
+        }
+
+
+        // 清除高亮
+        function removeHighlights(element) {
+            if (element.classList.contains('highlight')) {
+                element.parentElement.replaceChild(document.createTextNode(element.textContent), element);
+            } else {
+                for (let i = 0; i < element.children.length; i++) {
+                    removeHighlights(element.children[i]);
+                }
+            }
+        }
+
+
+        // 清除搜索
+        function clearSearch() {
+            searchBox.value = '';
+            searchMemories();
+        }
+
+
+        // 防抖函数
+        function debounce(func, wait) {
+            let timeout;
+            return function() {
+                const context = this;
+                const args = arguments;
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(context, args), wait);
+            };
+        }
+
 
         // 页面加载时初始化
         document.addEventListener('DOMContentLoaded', () => {
